@@ -1,8 +1,16 @@
-# AgentForge
+# autogen-web
 
 A full-stack multi-agent AI platform built on [Microsoft AutoGen](https://github.com/microsoft/autogen). Orchestrate teams of specialized AI agents through a real-time web interface to solve complex coding, research, and reasoning tasks.
 
 > Originally created to demonstrate AutoGen's multi-agent capabilities. Rebuilt as a production-grade platform with a modern UI, persistent sessions, and real-time WebSocket streaming.
+
+---
+
+## Screenshots
+
+![Welcome screen showing the four agent mode cards](./docs/screenshots/welcome-screen.svg)
+
+![Chat interface with a live Pair Coder session and agent activity panel](./docs/screenshots/chat-interface.svg)
 
 ---
 
@@ -49,8 +57,8 @@ User sends task  →  Agents plan & collaborate  →  Streamed back to UI  →  
 **Requirements:** Python 3.10+ and a running LLM backend (e.g. [LM Studio](https://lmstudio.ai) on `localhost:1234`, or an OpenAI API key).
 
 ```bash
-git clone https://github.com/punyamodi/agentforge
-cd agentforge
+git clone https://github.com/punyamodi/autogen-web
+cd autogen-web
 cp .env.example .env
 # Edit .env with your LLM details
 ```
@@ -176,7 +184,7 @@ Interactive Swagger UI: [http://localhost:8000/api/docs](http://localhost:8000/a
 
 ## Legacy Code
 
-The original AutoGen scripts are preserved in the [`legacy/original`](https://github.com/punyamodi/agentforge/tree/legacy/original) branch.
+The original AutoGen scripts are preserved in the [`legacy/original`](https://github.com/punyamodi/autogen-web/tree/legacy/original) branch.
 
 ---
 

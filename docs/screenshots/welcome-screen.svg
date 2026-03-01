@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+<defs>
+  <style>
+    .t { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+    .m { font-family: 'Cascadia Code', 'Consolas', 'Courier New', monospace; }
+  </style>
+</defs>
+
+<!-- BACKGROUND -->
+<rect width="1280" height="800" fill="#0d1117"/>
+
+<!-- ═══ SIDEBAR (0–260) ═══ -->
+<rect x="0" y="0" width="260" height="800" fill="#161b22"/>
+<line x1="260" y1="0" x2="260" y2="800" stroke="#30363d" stroke-width="1"/>
+
+<!-- Header -->
+<line x1="0" y1="56" x2="260" y2="56" stroke="#21262d" stroke-width="1"/>
+<polygon points="140,14 130,32 139,32 137,46 148,28 138,28" fill="none" stroke="#58a6ff" stroke-width="1.8" stroke-linejoin="round"/>
+<text x="52" y="34" class="t" font-size="14" font-weight="700" fill="#e6edf3">AgentForge</text>
+<rect x="222" y="16" width="26" height="26" rx="5" fill="#58a6ff"/>
+<line x1="235" y1="22" x2="235" y2="36" stroke="#fff" stroke-width="1.8"/>
+<line x1="228" y1="29" x2="242" y2="29" stroke="#fff" stroke-width="1.8"/>
+
+<!-- Mode section -->
+<text x="16" y="80" class="t" font-size="10" font-weight="700" fill="#6e7681" letter-spacing="1">MODE</text>
+<rect x="8" y="86" width="244" height="32" rx="4" fill="transparent"/>
+<text x="22" y="107" class="t" font-size="13" fill="#8b949e">Pair Coder</text>
+<rect x="8" y="122" width="244" height="32" rx="4" fill="transparent"/>
+<text x="22" y="143" class="t" font-size="13" fill="#8b949e">Coding Team</text>
+<rect x="8" y="158" width="244" height="32" rx="4" fill="transparent"/>
+<text x="22" y="179" class="t" font-size="13" fill="#8b949e">Jarvis</text>
+<rect x="8" y="194" width="244" height="32" rx="4" fill="transparent"/>
+<text x="22" y="215" class="t" font-size="13" fill="#8b949e">Research Team</text>
+
+<line x1="0" y1="236" x2="260" y2="236" stroke="#21262d" stroke-width="1"/>
+<text x="16" y="257" class="t" font-size="10" font-weight="700" fill="#6e7681" letter-spacing="1">HISTORY</text>
+<text x="20" y="284" class="t" font-size="12" fill="#6e7681">No sessions yet</text>
+
+<line x1="0" y1="748" x2="260" y2="748" stroke="#21262d" stroke-width="1"/>
+<circle cx="24" cy="774" r="7" fill="none" stroke="#8b949e" stroke-width="1.4"/>
+<circle cx="24" cy="774" r="3" fill="none" stroke="#8b949e" stroke-width="1.4"/>
+<text x="38" y="779" class="t" font-size="13" fill="#8b949e">Settings</text>
+
+
+<!-- ═══ MAIN CONTENT (260–1280) – Welcome Screen ═══ -->
+
+<!-- Header bar -->
+<rect x="260" y="0" width="1020" height="56" fill="#161b22"/>
+<line x1="260" y1="56" x2="1280" y2="56" stroke="#30363d" stroke-width="1"/>
+<line x1="278" y1="21" x2="298" y2="21" stroke="#8b949e" stroke-width="1.6"/>
+<line x1="278" y1="28" x2="298" y2="28" stroke="#8b949e" stroke-width="1.6"/>
+<line x1="278" y1="35" x2="298" y2="35" stroke="#8b949e" stroke-width="1.6"/>
+<text x="314" y="34" class="t" font-size="15" font-weight="600" fill="#e6edf3">New Chat</text>
+<circle cx="1154" cy="28" r="5" fill="#f85149"/>
+<text x="1165" y="33" class="t" font-size="12" fill="#f85149">No LLM</text>
+<rect x="1202" y="16" width="56" height="26" rx="5" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+<text x="1218" y="33" class="t" font-size="12" fill="#6e7681">Export</text>
+
+<!-- ─── Welcome content (centered in 260–1280) ─── -->
+<!-- Center X = 260 + 1020/2 = 770 -->
+
+<!-- Large icon -->
+<polygon points="770,136 750,168 768,168 765,196 786,164 768,164" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-linejoin="round"/>
+
+<!-- Title -->
+<text x="770" y="224" class="t" text-anchor="middle" font-size="28" font-weight="700" fill="#e6edf3">AgentForge</text>
+
+<!-- Subtitle -->
+<text x="770" y="256" class="t" text-anchor="middle" font-size="15" fill="#8b949e">A multi-agent AI platform powered by Microsoft AutoGen.</text>
+<text x="770" y="276" class="t" text-anchor="middle" font-size="15" fill="#8b949e">Select a mode below and start a conversation.</text>
+
+<!-- ─── Mode cards (2 × 2 grid) ─── -->
+<!-- Card layout: 2 cols × 2 rows, each 216×130, gap 16, centered -->
+<!-- Left col: x=554, Right col: x=786 -->
+<!-- Row 1: y=308, Row 2: y=454 -->
+
+<!-- ── Pair Coder ── -->
+<rect x="554" y="308" width="216" height="130" rx="10" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+<rect x="554" y="308" width="216" height="130" rx="10" fill="rgba(88,166,255,0.04)"/>
+<!-- Icon circle -->
+<circle cx="574" cy="336" r="14" fill="rgba(88,166,255,0.15)"/>
+<text x="570" y="341" class="t" font-size="11" font-weight="700" fill="#58a6ff">&lt;/&gt;</text>
+<text x="596" y="335" class="t" font-size="14" font-weight="600" fill="#e6edf3">Pair Coder</text>
+<text x="596" y="352" class="t" font-size="11" fill="#8b949e">2 agents</text>
+<text x="570" y="385" class="t" font-size="12" fill="#8b949e">CTO plans, Executor writes</text>
+<text x="570" y="402" class="t" font-size="12" fill="#8b949e">and runs code directly.</text>
+<rect x="554" y="420" width="216" height="1" fill="#30363d"/>
+<text x="570" y="434" class="t" font-size="11" fill="#58a6ff">Best for focused coding tasks</text>
+
+<!-- ── Coding Team ── -->
+<rect x="786" y="308" width="216" height="130" rx="10" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+<rect x="786" y="308" width="216" height="130" rx="10" fill="rgba(188,140,255,0.04)"/>
+<circle cx="806" cy="336" r="14" fill="rgba(188,140,255,0.15)"/>
+<text x="799" y="341" class="t" font-size="11" font-weight="700" fill="#bc8cff">&#128101;</text>
+<text x="828" y="335" class="t" font-size="14" font-weight="600" fill="#e6edf3">Coding Team</text>
+<text x="828" y="352" class="t" font-size="11" fill="#8b949e">6 agents</text>
+<text x="802" y="385" class="t" font-size="12" fill="#8b949e">Full team: planner, engineer,</text>
+<text x="802" y="402" class="t" font-size="12" fill="#8b949e">scientist, critic and more.</text>
+<rect x="786" y="420" width="216" height="1" fill="#30363d"/>
+<text x="802" y="434" class="t" font-size="11" fill="#bc8cff">Best for complex projects</text>
+
+<!-- ── Jarvis ── -->
+<rect x="554" y="454" width="216" height="130" rx="10" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+<rect x="554" y="454" width="216" height="130" rx="10" fill="rgba(255,166,87,0.04)"/>
+<circle cx="574" cy="482" r="14" fill="rgba(255,166,87,0.15)"/>
+<text x="567" y="487" class="t" font-size="11" font-weight="700" fill="#ffa657">&#9733;</text>
+<text x="596" y="481" class="t" font-size="14" font-weight="600" fill="#e6edf3">Jarvis</text>
+<text x="596" y="498" class="t" font-size="11" fill="#8b949e">9 agents</text>
+<text x="570" y="531" class="t" font-size="12" fill="#8b949e">Multi-skill assistant with</text>
+<text x="570" y="548" class="t" font-size="12" fill="#8b949e">Python, C++, advisor &amp; more.</text>
+<rect x="554" y="566" width="216" height="1" fill="#30363d"/>
+<text x="570" y="580" class="t" font-size="11" fill="#ffa657">Best for general-purpose tasks</text>
+
+<!-- ── Research Team ── -->
+<rect x="786" y="454" width="216" height="130" rx="10" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+<rect x="786" y="454" width="216" height="130" rx="10" fill="rgba(63,185,80,0.04)"/>
+<circle cx="806" cy="482" r="14" fill="rgba(63,185,80,0.15)"/>
+<text x="799" y="487" class="t" font-size="11" font-weight="700" fill="#3fb950">&#128269;</text>
+<text x="828" y="481" class="t" font-size="14" font-weight="600" fill="#e6edf3">Research Team</text>
+<text x="828" y="498" class="t" font-size="11" fill="#8b949e">6 agents</text>
+<text x="802" y="531" class="t" font-size="12" fill="#8b949e">Researcher, analyst, writer,</text>
+<text x="802" y="548" class="t" font-size="12" fill="#8b949e">fact-checker, and executor.</text>
+<rect x="786" y="566" width="216" height="1" fill="#30363d"/>
+<text x="802" y="580" class="t" font-size="11" fill="#3fb950">Best for research and reports</text>
+
+<!-- Bottom hint text -->
+<text x="770" y="630" class="t" text-anchor="middle" font-size="13" fill="#6e7681">Configure your LLM under Settings before starting</text>
+
+</svg>

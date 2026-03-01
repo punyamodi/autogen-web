@@ -1,0 +1,260 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+<defs>
+  <style>
+    .t { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+    .m { font-family: 'Cascadia Code', 'Consolas', 'Courier New', monospace; }
+  </style>
+  <clipPath id="chat-clip"><rect x="260" y="56" width="780" height="624"/></clipPath>
+  <clipPath id="code-clip"><rect x="294" y="334" width="720" height="230"/></clipPath>
+</defs>
+
+<!-- ═══ BACKGROUND ═══ -->
+<rect width="1280" height="800" fill="#0d1117"/>
+
+<!-- ═══ SIDEBAR (0–260) ═══ -->
+<rect x="0" y="0" width="260" height="800" fill="#161b22"/>
+<line x1="260" y1="0" x2="260" y2="800" stroke="#30363d" stroke-width="1"/>
+
+<!-- Sidebar Header -->
+<line x1="0" y1="56" x2="260" y2="56" stroke="#21262d" stroke-width="1"/>
+<!-- Lightning icon -->
+<polygon points="140,14 130,32 139,32 137,46 148,28 138,28" fill="none" stroke="#58a6ff" stroke-width="1.8" stroke-linejoin="round"/>
+<!-- Brand name -->
+<text x="52" y="34" class="t" font-size="14" font-weight="700" fill="#e6edf3">AgentForge</text>
+<!-- New chat (+) button -->
+<rect x="222" y="16" width="26" height="26" rx="5" fill="#58a6ff"/>
+<line x1="235" y1="22" x2="235" y2="36" stroke="#fff" stroke-width="1.8"/>
+<line x1="228" y1="29" x2="242" y2="29" stroke="#fff" stroke-width="1.8"/>
+
+<!-- Mode section label -->
+<text x="16" y="80" class="t" font-size="10" font-weight="700" fill="#6e7681" letter-spacing="1">MODE</text>
+
+<!-- Pair Coder – active -->
+<rect x="8" y="86" width="244" height="32" rx="4" fill="rgba(88,166,255,0.12)"/>
+<rect x="8" y="86" width="3" height="32" rx="2" fill="#58a6ff"/>
+<text x="22" y="107" class="t" font-size="13" font-weight="600" fill="#58a6ff">Pair Coder</text>
+
+<!-- Coding Team -->
+<rect x="8" y="122" width="244" height="32" rx="4" fill="transparent"/>
+<text x="22" y="143" class="t" font-size="13" fill="#8b949e">Coding Team</text>
+
+<!-- Jarvis -->
+<rect x="8" y="158" width="244" height="32" rx="4" fill="transparent"/>
+<text x="22" y="179" class="t" font-size="13" fill="#8b949e">Jarvis</text>
+
+<!-- Research Team -->
+<rect x="8" y="194" width="244" height="32" rx="4" fill="transparent"/>
+<text x="22" y="215" class="t" font-size="13" fill="#8b949e">Research Team</text>
+
+<!-- Border under modes -->
+<line x1="0" y1="236" x2="260" y2="236" stroke="#21262d" stroke-width="1"/>
+
+<!-- History section label -->
+<text x="16" y="257" class="t" font-size="10" font-weight="700" fill="#6e7681" letter-spacing="1">HISTORY</text>
+
+<!-- Session 1 – active -->
+<rect x="8" y="264" width="244" height="44" rx="4" fill="#21262d"/>
+<text x="20" y="282" class="t" font-size="13" font-weight="500" fill="#e6edf3">Sort dicts task</text>
+<text x="20" y="299" class="t" font-size="11" fill="#8b949e">Pair Coder · 2m ago</text>
+
+<!-- Session 2 -->
+<text x="20" y="330" class="t" font-size="13" fill="#8b949e">FastAPI CRUD app</text>
+<text x="20" y="347" class="t" font-size="11" fill="#6e7681">Coding Team · 1h ago</text>
+
+<!-- Session 3 -->
+<text x="20" y="378" class="t" font-size="13" fill="#8b949e">Research report: LLMs</text>
+<text x="20" y="395" class="t" font-size="11" fill="#6e7681">Research Team · 3h ago</text>
+
+<!-- Session 4 -->
+<text x="20" y="426" class="t" font-size="13" fill="#8b949e">Debug memory leak</text>
+<text x="20" y="443" class="t" font-size="11" fill="#6e7681">Coding Team · 5h ago</text>
+
+<!-- Sidebar Footer -->
+<line x1="0" y1="748" x2="260" y2="748" stroke="#21262d" stroke-width="1"/>
+<!-- Settings icon (simplified gear) -->
+<circle cx="24" cy="774" r="7" fill="none" stroke="#8b949e" stroke-width="1.4"/>
+<circle cx="24" cy="774" r="3" fill="none" stroke="#8b949e" stroke-width="1.4"/>
+<text x="38" y="779" class="t" font-size="13" fill="#8b949e">Settings</text>
+<!-- Theme moon icon -->
+<path d="M238 768 a8 8 0 1 0 10 10 6 6 0 1 1 -10 -10" fill="none" stroke="#8b949e" stroke-width="1.4"/>
+
+
+<!-- ═══ MAIN CHAT AREA (260–1040) ═══ -->
+
+<!-- Chat header -->
+<rect x="260" y="0" width="780" height="56" fill="#161b22"/>
+<line x1="260" y1="56" x2="1040" y2="56" stroke="#30363d" stroke-width="1"/>
+
+<!-- Hamburger -->
+<line x1="278" y1="21" x2="298" y2="21" stroke="#8b949e" stroke-width="1.6"/>
+<line x1="278" y1="28" x2="298" y2="28" stroke="#8b949e" stroke-width="1.6"/>
+<line x1="278" y1="35" x2="298" y2="35" stroke="#8b949e" stroke-width="1.6"/>
+
+<!-- Session title -->
+<text x="314" y="34" class="t" font-size="15" font-weight="600" fill="#e6edf3">Sort dicts task</text>
+
+<!-- Edit icon (pencil) -->
+<path d="M452 22 l4 4 -14 14 -4 0 0 -4 Z" fill="none" stroke="#6e7681" stroke-width="1.3"/>
+
+<!-- LLM status – connected -->
+<circle cx="884" cy="28" r="5" fill="#3fb950"/>
+<text x="895" y="33" class="t" font-size="12" fill="#3fb950">Connected</text>
+
+<!-- Export button -->
+<rect x="956" y="16" width="56" height="26" rx="5" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+<text x="972" y="33" class="t" font-size="12" fill="#8b949e">Export</text>
+
+<!-- Clear button -->
+<rect x="1018" y="16" width="50" height="26" rx="5" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+<text x="1031" y="33" class="t" font-size="12" fill="#8b949e">Clear</text>
+
+<!-- ─── Chat messages ─── -->
+<rect x="260" y="56" width="780" height="624" fill="#0d1117"/>
+
+<!-- User message (right-aligned) -->
+<rect x="616" y="74" width="408" height="52" rx="10" fill="#21262d"/>
+<text x="636" y="97" class="t" font-size="13" fill="#e6edf3">Write a Python function to sort a list of dicts</text>
+<text x="636" y="115" class="t" font-size="13" fill="#e6edf3">by multiple keys</text>
+
+<!-- CTO badge -->
+<rect x="276" y="148" width="42" height="20" rx="4" fill="rgba(88,166,255,0.15)"/>
+<text x="283" y="162" class="t" font-size="10" font-weight="700" fill="#58a6ff">CTO</text>
+
+<!-- CTO message bubble -->
+<rect x="276" y="172" width="500" height="76" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+<text x="294" y="196" class="t" font-size="13" fill="#e6edf3">Let me analyze this. We need sorted() with a tuple key that maps</text>
+<text x="294" y="215" class="t" font-size="13" fill="#e6edf3">each dict to the requested key sequence. Type hints throughout.</text>
+<text x="294" y="238" class="t" font-size="12" fill="#58a6ff">Executor, please implement with full type annotations.</text>
+
+<!-- Executor badge -->
+<rect x="276" y="268" width="65" height="20" rx="4" fill="rgba(63,185,80,0.15)"/>
+<text x="283" y="282" class="t" font-size="10" font-weight="700" fill="#3fb950">Executor</text>
+
+<!-- Executor message bubble -->
+<rect x="276" y="292" width="728" height="282" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+<text x="294" y="316" class="t" font-size="13" fill="#e6edf3">Here's the implementation with full type hints:</text>
+
+<!-- Code block -->
+<rect x="294" y="330" width="694" height="228" rx="6" fill="#0d1117"/>
+
+<!-- Code line 1 -->
+<text y="355" class="m" font-size="12">
+  <tspan x="314" fill="#79b8ff">from</tspan>
+  <tspan fill="#e6edf3"> typing </tspan>
+  <tspan fill="#79b8ff">import</tspan>
+  <tspan fill="#e6edf3"> Any</tspan>
+</text>
+
+<!-- Code line 3 (blank skipped) -->
+<text y="377" class="m" font-size="12">
+  <tspan x="314" fill="#79b8ff">def</tspan>
+  <tspan fill="#b392f0"> sort_dicts</tspan>
+  <tspan fill="#e6edf3">(data: list[dict[str, Any]], keys: list[str])</tspan>
+  <tspan fill="#79b8ff"> -></tspan>
+  <tspan fill="#e6edf3"> list[dict[str, Any]]:</tspan>
+</text>
+
+<!-- Code line 4 -->
+<text y="399" class="m" font-size="12">
+  <tspan x="314" fill="#e6edf3">    </tspan>
+  <tspan fill="#79b8ff">return</tspan>
+  <tspan fill="#e6edf3"> sorted(data, key=</tspan>
+  <tspan fill="#79b8ff">lambda</tspan>
+  <tspan fill="#e6edf3"> x: tuple(</tspan>
+</text>
+
+<!-- Code line 5 -->
+<text y="421" class="m" font-size="12">
+  <tspan x="314" fill="#e6edf3">        x.get(k) </tspan>
+  <tspan fill="#79b8ff">for</tspan>
+  <tspan fill="#e6edf3"> k </tspan>
+  <tspan fill="#79b8ff">in</tspan>
+  <tspan fill="#e6edf3"> keys))</tspan>
+</text>
+
+<!-- Code line 7 (blank) -->
+<!-- Code line 8 – comment -->
+<text x="314" y="443" class="m" font-size="12" fill="#8b949e"># Sort by name, then by age</text>
+
+<!-- Code line 9 -->
+<text y="465" class="m" font-size="12">
+  <tspan x="314" fill="#e6edf3">result = sort_dicts(people, keys=[</tspan>
+  <tspan fill="#f8c555">"name"</tspan>
+  <tspan fill="#e6edf3">, </tspan>
+  <tspan fill="#f8c555">"age"</tspan>
+  <tspan fill="#e6edf3">])</tspan>
+</text>
+
+<!-- Code line 10 -->
+<text y="487" class="m" font-size="12">
+  <tspan x="314" fill="#79b8ff">assert</tspan>
+  <tspan fill="#e6edf3"> result[0][</tspan>
+  <tspan fill="#f8c555">"name"</tspan>
+  <tspan fill="#e6edf3">] == </tspan>
+  <tspan fill="#f8c555">"Alice"</tspan>
+</text>
+
+<!-- Code line 11 -->
+<text x="314" y="509" class="m" font-size="12" fill="#3fb950">TERMINATE</text>
+
+<!-- Scrollbar -->
+<rect x="1030" y="80" width="5" height="120" rx="2.5" fill="#30363d"/>
+
+<!-- ─── Input area ─── -->
+<line x1="260" y1="680" x2="1040" y2="680" stroke="#30363d" stroke-width="1"/>
+<rect x="276" y="694" width="742" height="68" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+<text x="294" y="722" class="t" font-size="13" fill="#6e7681">Ask anything... (Ctrl+Enter to send)</text>
+
+<!-- Send button -->
+<rect x="982" y="708" width="36" height="36" rx="7" fill="#58a6ff"/>
+<polygon points="998,718 1010,726 998,726" fill="none" stroke="white" stroke-width="1.5"/>
+<line x1="992" y1="726" x2="1010" y2="726" stroke="white" stroke-width="1.5"/>
+
+<!-- Bottom labels -->
+<text x="294" y="776" class="t" font-size="11" fill="#6e7681">Mode: Pair Coder</text>
+<text x="640" y="776" class="t" font-size="11" fill="#6e7681">Ctrl+Enter to send  ·  Shift+Enter for new line</text>
+
+
+<!-- ═══ AGENT PANEL (1040–1280) ═══ -->
+<rect x="1040" y="0" width="240" height="800" fill="#161b22"/>
+<line x1="1040" y1="0" x2="1040" y2="800" stroke="#30363d" stroke-width="1"/>
+
+<!-- Panel header -->
+<line x1="1040" y1="56" x2="1280" y2="56" stroke="#30363d" stroke-width="1"/>
+<text x="1056" y="33" class="t" font-size="14" font-weight="600" fill="#e6edf3">Active Agents</text>
+<!-- Close X -->
+<line x1="1254" y1="22" x2="1266" y2="34" stroke="#6e7681" stroke-width="1.5"/>
+<line x1="1266" y1="22" x2="1254" y2="34" stroke="#6e7681" stroke-width="1.5"/>
+
+<!-- CTO card -->
+<rect x="1052" y="68" width="212" height="68" rx="8" fill="#21262d"/>
+<circle cx="1076" cy="102" r="18" fill="rgba(88,166,255,0.12)" stroke="#58a6ff" stroke-width="1.5"/>
+<text x="1068" y="107" class="t" font-size="11" font-weight="700" fill="#58a6ff">CTO</text>
+<text x="1100" y="95" class="t" font-size="13" font-weight="500" fill="#e6edf3">CTO</text>
+<text x="1100" y="112" class="t" font-size="11" fill="#8b949e">Chief Tech Officer</text>
+<circle cx="1250" cy="84" r="5" fill="#3fb950"/>
+<text x="1230" y="128" class="t" font-size="10" fill="#3fb950">Active</text>
+
+<!-- Executor card -->
+<rect x="1052" y="144" width="212" height="68" rx="8" fill="#21262d"/>
+<circle cx="1076" cy="178" r="18" fill="rgba(63,185,80,0.12)" stroke="#3fb950" stroke-width="1.5"/>
+<text x="1068" y="183" class="t" font-size="11" font-weight="700" fill="#3fb950">EXE</text>
+<text x="1100" y="171" class="t" font-size="13" font-weight="500" fill="#e6edf3">Executor</text>
+<text x="1100" y="188" class="t" font-size="11" fill="#8b949e">Code Executor</text>
+<circle cx="1250" cy="160" r="5" fill="#6e7681"/>
+<text x="1232" y="204" class="t" font-size="10" fill="#6e7681">Idle</text>
+
+<!-- Mode info card -->
+<rect x="1052" y="228" width="212" height="92" rx="8" fill="rgba(88,166,255,0.06)" stroke="rgba(88,166,255,0.2)" stroke-width="1"/>
+<text x="1068" y="250" class="t" font-size="10" font-weight="700" fill="#8b949e" letter-spacing="1">CURRENT MODE</text>
+<text x="1068" y="272" class="t" font-size="14" font-weight="600" fill="#e6edf3">Pair Coder</text>
+<text x="1068" y="291" class="t" font-size="11" fill="#8b949e">RoundRobin · 2 agents</text>
+<text x="1068" y="310" class="t" font-size="11" fill="#58a6ff">3 messages exchanged</text>
+
+<!-- Session stats card -->
+<rect x="1052" y="336" width="212" height="72" rx="8" fill="#21262d"/>
+<text x="1068" y="358" class="t" font-size="10" font-weight="700" fill="#6e7681" letter-spacing="1">SESSION</text>
+<text x="1068" y="378" class="t" font-size="13" fill="#e6edf3">3 messages · 2 agents</text>
+<text x="1068" y="396" class="t" font-size="11" fill="#8b949e">Started 2 min ago</text>
+
+</svg>
