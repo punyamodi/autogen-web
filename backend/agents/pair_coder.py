@@ -1,33 +1,37 @@
-import queue
+from typing import Any, AsyncIterator, Dict
 
-import autogen
+from autogen_agentchat.agents import AssistantAgent, CodeExecutorAgent
+from autogen_agentchat.conditions import MaxMessageTermination, TextMentionTermination
+from autogen_agentchat.teams import RoundRobinGroupChat
 
-from .base import CapturingUserProxy
+from .base import build_code_executor, build_model_client, stream_team
 
 
-def run_pair_coder(message: str, llm_config: dict, capture_queue: queue.Queue) -> None:
-    assistant = autogen.AssistantAgent(
+async def pair_coder_stream(message: str, llm_config: dict) -> AsyncIterator[Dict[str, Any]]:
+    model_client = build_model_client(llm_config)
+    code_executor = build_code_executor()
+
+    cto = AssistantAgent(
         name="CTO",
-        llm_config=llm_config,
+        model_client=model_client,
         system_message=(
             "You are a Chief Technical Officer and expert software engineer. "
             "Write clean, efficient, production-ready code in any language. "
-            "Always handle edge cases and provide complete, runnable solutions. "
-            "After solving the task reply TERMINATE."
+            "Handle all edge cases and provide complete, runnable solutions. "
+            "When the task is complete, end your final message with TERMINATE."
         ),
     )
 
-    executor = CapturingUserProxy(
-        capture_queue=capture_queue,
+    executor = CodeExecutorAgent(
         name="Executor",
-        human_input_mode="NEVER",
-        max_consecutive_auto_reply=10,
-        is_termination_msg=lambda x: x.get("content", "").rstrip().endswith("TERMINATE"),
-        code_execution_config={"work_dir": "backend/workspace", "use_docker": False},
-        system_message=(
-            "Reply TERMINATE if the task has been solved at full satisfaction. "
-            "Otherwise reply CONTINUE, or explain why the task is not yet solved."
-        ),
+        code_executor=code_executor,
     )
 
-    executor.initiate_chat(assistant, message=message)
+    termination = TextMentionTermination("TERMINATE") | MaxMessageTermination(20)
+    team = RoundRobinGroupChat(
+        participants=[cto, executor],
+        termination_condition=termination,
+    )
+
+    async for msg in stream_team(team, message):
+        yield msg

@@ -1,14 +1,19 @@
-import queue
+from typing import Any, AsyncIterator, Dict
 
-import autogen
+from autogen_agentchat.agents import AssistantAgent, CodeExecutorAgent
+from autogen_agentchat.conditions import MaxMessageTermination, TextMentionTermination
+from autogen_agentchat.teams import SelectorGroupChat
 
-from .base import CapturingGroupChatManager
+from .base import build_code_executor, build_model_client, stream_team
 
 
-def run_jarvis(message: str, llm_config: dict, capture_queue: queue.Queue) -> None:
-    python_coder = autogen.AssistantAgent(
+async def jarvis_stream(message: str, llm_config: dict) -> AsyncIterator[Dict[str, Any]]:
+    model_client = build_model_client(llm_config)
+    code_executor = build_code_executor()
+
+    python_coder = AssistantAgent(
         name="PythonCoder",
-        llm_config=llm_config,
+        model_client=model_client,
         system_message=(
             "You are an expert Python engineer. Write efficient, idiomatic Python code. "
             "Handle all edge cases and follow PEP 8 conventions."
@@ -16,9 +21,9 @@ def run_jarvis(message: str, llm_config: dict, capture_queue: queue.Queue) -> No
         description="Writes expert-level Python code.",
     )
 
-    cpp_coder = autogen.AssistantAgent(
+    cpp_coder = AssistantAgent(
         name="CppCoder",
-        llm_config=llm_config,
+        model_client=model_client,
         system_message=(
             "You are an expert C++ engineer. Write performant, modern C++17/20 code. "
             "Handle memory management and edge cases correctly."
@@ -26,9 +31,9 @@ def run_jarvis(message: str, llm_config: dict, capture_queue: queue.Queue) -> No
         description="Writes expert-level C++ code.",
     )
 
-    general_coder = autogen.AssistantAgent(
+    general_coder = AssistantAgent(
         name="Coder",
-        llm_config=llm_config,
+        model_client=model_client,
         system_message=(
             "You are a polyglot software engineer proficient in all major languages. "
             "Choose the best language for each task and write complete solutions."
@@ -36,9 +41,9 @@ def run_jarvis(message: str, llm_config: dict, capture_queue: queue.Queue) -> No
         description="Writes code in any programming language.",
     )
 
-    critic = autogen.AssistantAgent(
+    critic = AssistantAgent(
         name="Critic",
-        llm_config=llm_config,
+        model_client=model_client,
         system_message=(
             "Analyse all code produced by the team. Identify bugs, missing edge cases, "
             "and performance issues. Guide agents to improve their solutions."
@@ -46,19 +51,20 @@ def run_jarvis(message: str, llm_config: dict, capture_queue: queue.Queue) -> No
         description="Reviews code quality and correctness.",
     )
 
-    cto = autogen.AssistantAgent(
+    cto = AssistantAgent(
         name="CTO",
-        llm_config=llm_config,
+        model_client=model_client,
         system_message=(
             "You are the Chief Technical Officer. Oversee all work, "
-            "ensure architectural soundness, and give final approval on solutions."
+            "ensure architectural soundness, and give final approval on solutions. "
+            "When the task is fully complete, say TERMINATE."
         ),
         description="Provides technical leadership and final approval.",
     )
 
-    advisor = autogen.AssistantAgent(
+    advisor = AssistantAgent(
         name="Advisor",
-        llm_config=llm_config,
+        model_client=model_client,
         system_message=(
             "You are a wise senior advisor. Offer strategic guidance when the team is stuck. "
             "Provide concise, actionable recommendations."
@@ -66,9 +72,9 @@ def run_jarvis(message: str, llm_config: dict, capture_queue: queue.Queue) -> No
         description="Gives strategic advice when the team is uncertain.",
     )
 
-    friend = autogen.AssistantAgent(
+    friend = AssistantAgent(
         name="Friend",
-        llm_config=llm_config,
+        model_client=model_client,
         system_message=(
             "You are a friendly conversationalist. Engage naturally on any topic, "
             "provide encouragement, and keep conversations light and helpful."
@@ -76,9 +82,9 @@ def run_jarvis(message: str, llm_config: dict, capture_queue: queue.Queue) -> No
         description="Handles casual conversation and general questions.",
     )
 
-    aggregator = autogen.AssistantAgent(
+    aggregator = AssistantAgent(
         name="Aggregator",
-        llm_config=llm_config,
+        model_client=model_client,
         system_message=(
             "Collect all contributions from the team and synthesise a clear, "
             "complete final response for the user."
@@ -86,30 +92,18 @@ def run_jarvis(message: str, llm_config: dict, capture_queue: queue.Queue) -> No
         description="Synthesises all agent outputs into a final answer.",
     )
 
-    jarvis = autogen.UserProxyAgent(
-        name="Jarvis",
-        human_input_mode="NEVER",
-        max_consecutive_auto_reply=15,
-        is_termination_msg=lambda x: x.get("content", "").rstrip().endswith("TERMINATE"),
-        code_execution_config={"work_dir": "backend/workspace", "use_docker": False},
-        system_message=(
-            "Reply TERMINATE if the task has been fully solved. "
-            "Otherwise reply CONTINUE with the reason the task is not yet done."
-        ),
+    executor = CodeExecutorAgent(
+        name="Executor",
+        code_executor=code_executor,
+        description="Executes code and reports results.",
     )
 
-    groupchat = autogen.GroupChat(
-        agents=[jarvis, python_coder, cpp_coder, general_coder, critic, cto, advisor, friend, aggregator],
-        messages=[],
-        max_round=50,
-        speaker_selection_method="auto",
-        allow_repeat_speaker=False,
+    termination = TextMentionTermination("TERMINATE") | MaxMessageTermination(50)
+    team = SelectorGroupChat(
+        participants=[python_coder, cpp_coder, general_coder, critic, cto, advisor, friend, aggregator, executor],
+        model_client=model_client,
+        termination_condition=termination,
     )
 
-    manager = CapturingGroupChatManager(
-        capture_queue=capture_queue,
-        groupchat=groupchat,
-        llm_config=llm_config,
-    )
-
-    jarvis.initiate_chat(manager, message=message)
+    async for msg in stream_team(team, message):
+        yield msg

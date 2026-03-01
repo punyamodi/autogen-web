@@ -1,6 +1,4 @@
-import asyncio
 import json
-import queue
 import uuid
 from datetime import datetime
 from typing import Dict
@@ -8,14 +6,12 @@ from typing import Dict
 from fastapi import APIRouter, Depends, WebSocket, WebSocketDisconnect
 from sqlalchemy.orm import Session
 
-from ..agents.base import AgentRunner
+from ..agents.base import run_stream
 from ..core.database import ChatMessage, ChatSession, get_db
 from ..core.schemas import LLMConfig
 from ..core.settings import settings
 
 router = APIRouter()
-
-_active_runners: Dict[str, AgentRunner] = {}
 
 
 def _build_llm_config(cfg: LLMConfig) -> dict:
@@ -25,7 +21,6 @@ def _build_llm_config(cfg: LLMConfig) -> dict:
             {
                 "model": cfg.model,
                 "base_url": cfg.base_url,
-                "api_type": "open_ai",
                 "api_key": cfg.api_key,
             }
         ],
@@ -110,50 +105,27 @@ async def websocket_chat(websocket: WebSocket, session_id: str):
                     llm_config = _default_llm_config()
 
                 _save_message(db, session_id, "User", user_content, "user_message")
-
                 await websocket.send_json({"type": "thinking", "content": "Agents are working..."})
 
-                runner = AgentRunner(mode, llm_config)
-                _active_runners[session_id] = runner
-                runner.start(user_content)
-
-                loop = asyncio.get_event_loop()
                 accumulated: list[dict] = []
 
-                while True:
-                    try:
-                        msg = await loop.run_in_executor(
-                            None,
-                            lambda: runner.capture_queue.get(timeout=120),
-                        )
-                    except queue.Empty:
-                        await websocket.send_json(
-                            {"type": "error", "content": "Agent response timed out."}
-                        )
-                        break
-
-                    if msg["type"] == "agent_message":
+                try:
+                    async for msg in run_stream(user_content, mode, llm_config):
                         accumulated.append(msg)
                         await websocket.send_json(msg)
+                except Exception as exc:
+                    await websocket.send_json({"type": "error", "content": str(exc)})
+                else:
+                    for m in accumulated:
+                        _save_message(
+                            db,
+                            session_id,
+                            m.get("sender", "Agent"),
+                            m.get("content", ""),
+                            "agent_message",
+                        )
 
-                    elif msg["type"] == "error":
-                        await websocket.send_json(msg)
-                        break
-
-                    elif msg["type"] == "done":
-                        for m in accumulated:
-                            _save_message(
-                                db,
-                                session_id,
-                                m.get("sender", "Agent"),
-                                m.get("content", ""),
-                                "agent_message",
-                            )
-                        await websocket.send_json({"type": "done"})
-                        break
-
-                if session_id in _active_runners:
-                    del _active_runners[session_id]
+                await websocket.send_json({"type": "done"})
 
     except WebSocketDisconnect:
         pass
@@ -163,4 +135,3 @@ async def websocket_chat(websocket: WebSocket, session_id: str):
         except StopIteration:
             pass
         db.close()
-        _active_runners.pop(session_id, None)
